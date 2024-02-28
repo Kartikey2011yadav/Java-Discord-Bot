@@ -26,7 +26,7 @@ public class CommandManager extends ListenerAdapter {
         String command = event.getName();
         if (command.equals("welcome")) {
             // Run the 'ping' command
-            String userTag = event.getUser().getAsTag();
+            String userTag = event.getUser().getName();
             event.reply("Welcome to the server, **" + userTag + "**!").queue();
         }
         else if (command.equals("roles")) {
