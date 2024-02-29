@@ -81,7 +81,7 @@ public class EventListener extends ListenerAdapter {
                 EmbedBuilder builder = new EmbedBuilder().setTitle(title, postLink);
                 builder.setImage(link);
                 builder.setColor(Color.BLUE);
-                event.getChannel().sendMessage("Meme").setEmbeds(builder.build()).queue();
+                event.getChannel().sendMessageEmbeds(builder.build()).queue();
 
 
             } catch (MalformedURLException e) {
