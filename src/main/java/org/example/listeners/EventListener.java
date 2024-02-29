@@ -1,5 +1,6 @@
 package org.example.listeners;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.RichPresence;
@@ -59,7 +60,7 @@ public class EventListener extends ListenerAdapter {
             event.getChannel().sendMessage("\uD83E\uDD23").queue();
         }
         else if (message.contains("$Meme")) {
-                String line,postLink="",link="";
+                String line,postLink="",link="",title="";
             try {
                 URL url = new URL("https://meme-api.com/gimme");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
@@ -71,9 +72,17 @@ public class EventListener extends ListenerAdapter {
                         JSONObject jo = (JSONObject) o;
                         postLink = (String) jo.get("postLink");
                         link = (String) jo.get("url");
+                        title = (String) jo.get("title");
                     }
                 }
                 bf.close();
+                event.getMessage().delete().queue();
+
+                EmbedBuilder builder = new EmbedBuilder().setTitle(title, postLink);
+                builder.setImage(link);
+                builder.setColor(Color.BLUE);
+                event.getChannel().sendMessage("Meme").setEmbeds(builder.build()).queue();
+
 
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
@@ -82,7 +91,7 @@ public class EventListener extends ListenerAdapter {
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-            event.getChannel().sendMessage(link+" Post: "+postLink).queue();
+//            event.getChannel().sendMessage(link+" Post: "+postLink).queue();
         }
 
     }
