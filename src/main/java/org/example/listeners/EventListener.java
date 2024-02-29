@@ -2,6 +2,7 @@ package org.example.listeners;
 
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.RichPresence;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -10,6 +11,9 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
+import java.io.File;
 
 /**
  * Listens for events and responds with our custom code.
@@ -41,6 +45,9 @@ public class EventListener extends ListenerAdapter {
         String message = event.getMessage().getContentRaw();
         if (message.contains("Nathkhat")) {
             event.getChannel().sendMessage("Koham Sothari").queue();
+        }
+        else if (message.contains("emoji")) {
+            event.getChannel().sendMessage("\uD83E\uDD23").queue();
         }
     }
 
