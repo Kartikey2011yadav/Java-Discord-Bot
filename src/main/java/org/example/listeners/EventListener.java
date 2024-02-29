@@ -11,9 +11,18 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Listens for events and responds with our custom code.
@@ -27,13 +36,13 @@ public class EventListener extends ListenerAdapter {
      */
     @Override
     public void onMessageReactionAdd(@NotNull MessageReactionAddEvent event) {
-        User user = event.getUser();
-        String jumpLink = event.getJumpUrl();
+//        User user = event.getUser();
+//        String jumpLink = event.getJumpUrl();
 //        String emoji = event.getReaction().clearReactions().getAsReactionCode();
-        String channel = event.getChannel().getAsMention();
+//        String channel = event.getChannel().getAsMention();
 
 //        String message = user.getAsTag() + " reacted to a [message]("+jumpLink+") with " + emoji + " in the " + channel + " channel!";
-        event.getGuild().getDefaultChannel().getManager().queue();
+//        event.getGuild().getDefaultChannel().getManager().queue();
     }
 
     /**
@@ -49,7 +58,36 @@ public class EventListener extends ListenerAdapter {
         else if (message.contains("emoji")) {
             event.getChannel().sendMessage("\uD83E\uDD23").queue();
         }
+        else if (message.contains("$Meme")) {
+                String line,postLink="",link="";
+            try {
+                URL url = new URL("https://meme-api.com/gimme");
+                BufferedReader bf = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+                JSONParser parser = new JSONParser();
+                while ((line = bf.readLine() )!= null){
+                    JSONArray array = new JSONArray();
+                    array.add(parser.parse(line));
+                    for (Object o:array) {
+                        JSONObject jo = (JSONObject) o;
+                        postLink = (String) jo.get("postLink");
+                        link = (String) jo.get("url");
+                    }
+                }
+                bf.close();
+
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            event.getChannel().sendMessage(link+" Post: "+postLink).queue();
+        }
+
     }
+
+
 
     /**
      * Event fires when a new member joins a guild
