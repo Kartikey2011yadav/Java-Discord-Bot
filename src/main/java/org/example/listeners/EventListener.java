@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
+import net.dv8tion.jda.api.utils.FileUpload;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,12 +20,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Listens for events and responds with our custom code.
@@ -57,9 +59,24 @@ public class EventListener extends ListenerAdapter {
             event.getChannel().sendMessage("Koham Sothari").queue();
         }
         else if (message.contains("emoji")) {
-            event.getChannel().sendMessage("\uD83E\uDD23").queue();
+            event.getMessage().delete().queue();
+            File file = new File("src/main/java/org/example/assets/image.png");
+            Scanner sc = null;
+            try {
+                sc = new Scanner(file);
+                while (sc.hasNextLine()){
+                    System.out.println(sc.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("file not found");
+                throw new RuntimeException(e);
+            }
+
+//            event.getChannel().sendFiles(file).queue();
+
         }
-        else if (message.contains("$Meme")) {
+        else if (message.contains("meme")) {
+                event.getMessage().delete().queue();
                 String line,postLink="",link="",title="";
             try {
                 URL url = new URL("https://meme-api.com/gimme");
@@ -76,7 +93,6 @@ public class EventListener extends ListenerAdapter {
                     }
                 }
                 bf.close();
-                event.getMessage().delete().queue();
 
                 EmbedBuilder builder = new EmbedBuilder().setTitle(title, postLink);
                 builder.setImage(link);
