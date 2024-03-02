@@ -1,16 +1,20 @@
 package org.example.listeners;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.RichPresence;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
 import net.dv8tion.jda.api.utils.FileUpload;
 import org.jetbrains.annotations.NotNull;
@@ -56,26 +60,33 @@ public class EventListener extends ListenerAdapter {
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         String message = event.getMessage().getContentRaw();
         if (message.contains("Nathkhat")) {
+            System.out.println(event.getAuthor().getName());
+            Member m = event.getMessage().getMentions().getMembers().get(0);
+            System.out.println(m.getUser().getName());
             event.getChannel().sendMessage("Koham Sothari").queue();
         }
-        else if (message.contains("emoji")) {
+        else if (message.contains("emojiiiiii")) {
             event.getMessage().delete().queue();
-            File file = new File("src/main/java/org/example/assets/image.png");
-            Scanner sc = null;
-            try {
-                sc = new Scanner(file);
-                while (sc.hasNextLine()){
-                    System.out.println(sc.nextLine());
-                }
-            } catch (FileNotFoundException e) {
-                System.out.println("file not found");
-                throw new RuntimeException(e);
-            }
+            File file = new File("src/main/java/org/example/listeners/image.png");
+            event.getChannel().sendFiles(FileUpload.fromData(file)).queue();
+        } else if (message.contains("Emoji")) {
+            event.getMessage().delete().queue();
+            EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
+            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
+            builder.setColor(Color.BLUE);
+            event.getChannel().sendMessageEmbeds(builder.build()).queue();
 
-//            event.getChannel().sendFiles(file).queue();
+        } else if (message.contains("!emoji")) {
+            System.out.println(event.getAuthor().getName());
+            Member m = event.getMessage().getMentions().getMembers().get(0);
+            System.out.println(m.getUser().getName());
+            event.getMessage().delete().queue();
+            EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
+            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
+            builder.setColor(Color.BLUE);
+            event.getChannel().sendMessageEmbeds(builder.build()).queue();
 
-        }
-        else if (message.contains("meme")) {
+        } else if (message.contains("meme")) {
                 event.getMessage().delete().queue();
                 String line,postLink="",link="",title="";
             try {
@@ -111,8 +122,6 @@ public class EventListener extends ListenerAdapter {
         }
 
     }
-
-
 
     /**
      * Event fires when a new member joins a guild
