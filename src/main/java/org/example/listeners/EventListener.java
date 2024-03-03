@@ -3,10 +3,7 @@ package org.example.listeners;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.RichPresence;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -71,14 +68,18 @@ public class EventListener extends ListenerAdapter {
             event.getChannel().sendFiles(FileUpload.fromData(file)).queue();
         } else if (message.contains("Emoji")) {
             event.getMessage().delete().queue();
-            EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
-            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
-            builder.setColor(Color.BLUE);
-            event.getChannel().sendMessageEmbeds(builder.build()).queue();
+//            EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
+//            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
+//            builder.setColor(Color.BLUE);
+//            event.getChannel().sendMessageEmbeds(builder.build()).queue();
+//            event.getMessage().reply("hello").setMessageReference("1213397174520643654");
+            event.getChannel().sendMessage("hello 1").setMessageReference("1213137850552291409").queue();
+            event.getChannel().sendMessage("hello 2").setMessageReference("1213148332336091187").queue();
 
         } else if (message.contains("!emoji")) {
             System.out.println(event.getAuthor().getName());
             Member m = event.getMessage().getMentions().getMembers().get(0);
+            System.out.println(event.getRawData());
             System.out.println(m.getUser().getName());
             event.getMessage().delete().queue();
             EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
@@ -139,15 +140,15 @@ public class EventListener extends ListenerAdapter {
      * Event fires when a user updates their online status
      * Requires "Guild Presences" gateway intent AND cache enabled!
      */
-    @Override
-    public void onUserUpdateOnlineStatus(@NotNull UserUpdateOnlineStatusEvent event) {
-        int onlineMembers = 0;
-        for (Member member : event.getGuild().getMembers()) {
-            if (member.getOnlineStatus() == OnlineStatus.ONLINE) {
-                onlineMembers++;
-            }
-        }
-        String message = event.getUser().getAsTag()+"updated their online status! There are "+onlineMembers+" members online now!";
-        event.getGuild().getDefaultChannel().getManager().queue();
-    }
+//    @Override
+//    public void onUserUpdateOnlineStatus(@NotNull UserUpdateOnlineStatusEvent event) {
+//        int onlineMembers = 0;
+//        for (Member member : event.getGuild().getMembers()) {
+//            if (member.getOnlineStatus() == OnlineStatus.ONLINE) {
+//                onlineMembers++;
+//            }
+//        }
+//        String message = event.getUser().getAsTag()+"updated their online status! There are "+onlineMembers+" members online now!";
+//        event.getGuild().getDefaultChannel().getManager().queue();
+//    }
 }
