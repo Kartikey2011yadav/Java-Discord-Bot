@@ -1,0 +1,114 @@
+{
+  "op": 0,
+  "s": 35,
+  "t": "MESSAGE_CREATE",
+  "d": {
+    "mention_everyone": false,
+    "pinned": false,
+    "components": [],
+    "attachments": [],
+    "author": {
+      "premium_type": 0,
+      "global_name": "Darth AntiSimp",
+      "avatar_decoration_data": null,
+      "public_flags": 0,
+      "id": "903455907701207041",
+      "avatar": "c648c1b20fcbe1367dc034c1ccdf96ab",
+      "username": "devils_eye",
+      "discriminator": "0"
+    },
+    "flags": 0,
+    "type": 19,
+    "mention_roles": [],
+    "nonce": "1213857709208633344",
+    "edited_timestamp": null,
+    "content": "!emoji",
+    "tts": false,
+    "referenced_message": {
+      "mention_everyone": false,
+      "pinned": false,
+      "components": [],
+      "attachments": [],
+      "author": {
+        "premium_type": 0,
+        "global_name": "Tanishq Mehrunkar",
+        "avatar_decoration_data": null,
+        "public_flags": 4194560,
+        "id": "779206329813696522",
+        "avatar": "cc4b85d43648206e7ee676a9a8a150b5",
+        "username": "simpposeidon",
+        "discriminator": "0"
+      },
+      "flags": 0,
+      "type": 19,
+      "mention_roles": [],
+      "edited_timestamp": null,
+      "content": "vc",
+      "tts": false,
+      "mentions": [
+        {
+          "global_name": "Darth AntiSimp",
+          "is_member": false,
+          "avatar_decoration_data": null,
+          "public_flags": 0,
+          "id": "903455907701207041",
+          "avatar": "c648c1b20fcbe1367dc034c1ccdf96ab",
+          "username": "devils_eye",
+          "discriminator": "0"
+        }
+      ],
+      "message_reference": {
+        "guild_id": "957334979703111690",
+        "message_id": "1213137850552291409",
+        "channel_id": "957334980168650794"
+      },
+      "id": "1213148332336091187",
+      "embeds": [],
+      "channel_id": "957334980168650794",
+      "timestamp": "2024-03-01T15:38:21.635000+00:00"
+    },
+    "mentions": [
+      {
+        "global_name": "Tanishq Mehrunkar",
+        "avatar_decoration_data": null,
+        "public_flags": 4194560,
+        "id": "779206329813696522",
+        "avatar": "cc4b85d43648206e7ee676a9a8a150b5",
+        "username": "simpposeidon",
+        "discriminator": "0"
+      }
+    ],
+    "member": {
+      "premium_since": null,
+      "nick": null,
+      "joined_at": "2022-03-26T17:47:25.655000+00:00",
+      "communication_disabled_until": null,
+      "roles": [],
+      "pending": false,
+      "flags": 0,
+      "deaf": false,
+      "mute": false,
+      "avatar": null,
+      "user": {
+        "premium_type": 0,
+        "global_name": "Darth AntiSimp",
+        "avatar_decoration_data": null,
+        "public_flags": 0,
+        "id": "903455907701207041",
+        "avatar": "c648c1b20fcbe1367dc034c1ccdf96ab",
+        "username": "devils_eye",
+        "discriminator": "0"
+      }
+    },
+    "guild_id": "957334979703111690",
+    "message_reference": {
+      "guild_id": "957334979703111690",
+      "message_id": "1213148332336091187",
+      "channel_id": "957334980168650794"
+    },
+    "id": "1213857710357872651",
+    "embeds": [],
+    "channel_id": "957334980168650794",
+    "timestamp": "2024-03-03T14:37:10.535000+00:00"
+  }
+}
