@@ -32,6 +32,7 @@ public class DiscordBot extends ListenerAdapter {
         // Build shard manager
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(Token);
         builder.setStatus(OnlineStatus.ONLINE);
+        builder.setEventPassthrough(true);
         builder.setActivity(Activity.playing("With Kids"));
         builder.enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT);
         builder.setMemberCachePolicy(MemberCachePolicy.ALL);
