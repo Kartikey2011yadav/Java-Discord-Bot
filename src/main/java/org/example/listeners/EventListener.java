@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
+import net.dv8tion.jda.api.utils.AttachedFile;
 import net.dv8tion.jda.api.utils.FileUpload;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
@@ -68,13 +69,22 @@ public class EventListener extends ListenerAdapter {
             event.getChannel().sendFiles(FileUpload.fromData(file)).queue();
         } else if (message.contains("Emoji")) {
             event.getMessage().delete().queue();
-//            EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
-//            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
-//            builder.setColor(Color.BLUE);
-//            event.getChannel().sendMessageEmbeds(builder.build()).queue();
-//            event.getMessage().reply("hello").setMessageReference("1213397174520643654");
-            event.getChannel().sendMessage("hello 1").setMessageReference("1213137850552291409").queue();
-            event.getChannel().sendMessage("hello 2").setMessageReference("1213148332336091187").queue();
+            // Make a file upload instance which refers to a local file called "myFile.png"
+            // The second parameter "image.png" is the filename we tell discord to use for the attachment
+            FileUpload file = FileUpload.fromData(new File("src/main/java/org/example/assets/image.png"), "image.png");
+
+            // Build a message embed which refers to this attachment by the given name.
+            // Note that this must be the same name as configured for the attachment, not your local filename.
+            MessageEmbed embed = new EmbedBuilder()
+                    .setDescription("This is my cute cat :)")
+                    .setImage("attachment://image.png") // refer to the file by using the "attachment://" schema with the filename we gave it above
+                    .build();
+
+            event.getChannel().sendFiles(file) // send the file upload
+                    .addEmbeds(embed) // add the embed you want to reference the file with
+                    .queue();
+//            event.getChannel().sendMessage("hello 1").setMessageReference("1213137850552291409").queue();
+//            event.getChannel().sendMessage("hello 2").setMessageReference("1213148332336091187").queue();
 
         } else if (message.contains("!emoji")) {
             System.out.println(event.getAuthor().getName());
