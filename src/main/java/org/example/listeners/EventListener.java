@@ -63,21 +63,27 @@ public class EventListener extends ListenerAdapter {
             System.out.println(m.getUser().getName());
             event.getChannel().sendMessage("Koham Sothari").queue();
         }
-        else if (message.contains("emojiiiiii")) {
+        else if (message.contains("emoji")) {
             event.getMessage().delete().queue();
-            File file = new File("src/main/java/org/example/listeners/image.png");
-            event.getChannel().sendFiles(FileUpload.fromData(file)).queue();
-        } else if (message.contains("Emoji")) {
+            FileUpload file = FileUpload.fromData(new File("src/main/java/org/example/assets/GIF/Screenshot_20240303_061058_Instagram.gif"), "image.gif");
+
+            MessageEmbed embed = new EmbedBuilder()
+                    .setDescription("This is gif :)")
+                    .setImage("attachment://image.gif")
+                    .build();
+
+            event.getChannel().sendFiles(file)
+                    .addEmbeds(embed)
+                    .queue();
+        }
+        else if (message.contains("Emoji")) {
             event.getMessage().delete().queue();
-            // Make a file upload instance which refers to a local file called "myFile.png"
-            // The second parameter "image.png" is the filename we tell discord to use for the attachment
+
             FileUpload file = FileUpload.fromData(new File("src/main/java/org/example/assets/image.png"), "image.png");
 
-            // Build a message embed which refers to this attachment by the given name.
-            // Note that this must be the same name as configured for the attachment, not your local filename.
             MessageEmbed embed = new EmbedBuilder()
                     .setDescription("This is my cute cat :)")
-                    .setImage("attachment://image.png") // refer to the file by using the "attachment://" schema with the filename we gave it above
+                    .setImage("attachment://image.png")
                     .build();
 
             event.getChannel().sendFiles(file) // send the file upload
