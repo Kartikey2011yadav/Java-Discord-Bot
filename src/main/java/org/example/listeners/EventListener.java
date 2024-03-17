@@ -90,21 +90,23 @@ public class EventListener extends ListenerAdapter {
                     .addEmbeds(embed) // add the embed you want to reference the file with
                     .queue();
 //            event.getChannel().sendMessage("hello 1").setMessageReference("1213137850552291409").queue();
-//            event.getChannel().sendMessage("hello 2").setMessageReference("1213148332336091187").queue();
+//            event.getChannel().sendMessage("hello 2").setMessageReference("1213148332336091187").queue(); !!!!!
 
-        } else if (message.contains("!emoji")) {
+        } else if (message.contains("gifc")) {
             System.out.println(event.getAuthor().getName());
             Member m = event.getMessage().getMentions().getMembers().get(0);
             System.out.println(event.getRawData());
             System.out.println(m.getUser().getName());
             event.getMessage().delete().queue();
             EmbedBuilder builder = new EmbedBuilder().setTitle("TEST");
-            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
-            builder.setColor(Color.BLUE);
+            builder.setDescription("hello");
+            builder.setImage("https://github.com/Kartikey2011yadav/Java-Discord-Bot/blob/master/src/main/java/org/example/assets/GIF/SmartSelect_20240227_112358_Instagram.gif/?raw=true");
+//            builder.setImage("https://raw.githubusercontent.com/Kartikey2011yadav/Java-Discord-Bot/master/src/main/java/org/example/assets/image.png");
+            builder.setColor(Color.GREEN);
             event.getChannel().sendMessageEmbeds(builder.build()).queue();
 
         } else if (message.contains("meme")) {
-                event.getMessage().delete().queue();
+//                event.getMessage().delete().queue();
                 String line,postLink="",link="",title="";
             try {
                 URL url = new URL("https://meme-api.com/gimme");
