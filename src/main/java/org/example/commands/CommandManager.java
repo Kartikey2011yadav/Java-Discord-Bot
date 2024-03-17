@@ -87,7 +87,7 @@ public class CommandManager extends ListenerAdapter {
             builder.setColor(Color.BLUE);
 //            event.getChannel().sendMessageEmbeds(builder.build()).queue();
 //            event.getChannel().send
-            event.reply("Your message was sent!").setEphemeral(true).queue();
+            event.reply("Yousayr message was sent!").setEphemeral(true).queue();
         }
         else if (command.equals("giverole")) {
             Member member = event.getOption("user").getAsMember();
