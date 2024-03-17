@@ -46,13 +46,12 @@ public class DiscordBot extends ListenerAdapter {
 
 
     }
-    public Dotenv getConfig() { return config; }
 
     /**
      * Retrieves the bot environment variables.
      * @return the DotEnv instance for the bot.
      */
-//    public Dotenv getConfig() { return config; }
+    public Dotenv getConfig() { return config; }
 
     /**
      * Retrieves the bot shard manager.
